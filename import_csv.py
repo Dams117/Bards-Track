@@ -4,7 +4,7 @@ from database import SessionLocal, Jeu, Piste
 def importer_depuis_csv(nom_fichier):
     db = SessionLocal()
     
-    print(f"📂 Ouverture du fichier {nom_fichier}...")
+    print(f"Ouverture du fichier {nom_fichier}...")
     
     try:
         # On ouvre le fichier CSV en mode lecture ('r')
@@ -29,7 +29,7 @@ def importer_depuis_csv(nom_fichier):
                     db.add(nouveau_jeu)
                     db.commit() # On sauvegarde pour que SQLite lui donne un ID
                     jeu_existant = nouveau_jeu
-                    print(f"🎮 Nouveau jeu ajouté : {titre}")
+                    print(f"Nouveau jeu ajouté : {titre}")
                 
                 # 2. On vérifie si CETTE piste spécifique existe déjà pour ce jeu
                 piste_existante = db.query(Piste).filter(
@@ -50,12 +50,12 @@ def importer_depuis_csv(nom_fichier):
             
             # On valide tous les ajouts finaux
             db.commit()
-            print(f"✅ Importation terminée ! {compteur} nouvelles pistes ajoutées.")
+            print(f"Importation terminée ! {compteur} nouvelles pistes ajoutées.")
 
     except FileNotFoundError:
-        print(f"❌ Erreur : Le fichier {nom_fichier} est introuvable.")
+        print(f"Erreur : Le fichier {nom_fichier} est introuvable.")
     except Exception as e:
-        print(f"❌ Une erreur s'est produite : {e}")
+        print(f"Une erreur s'est produite : {e}")
     finally:
         db.close()
 

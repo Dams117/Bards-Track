@@ -79,7 +79,7 @@ def ajouter_musique(titre: str, url: str, timestamp_force: int | None = None) ->
             writer.writerow(["titre_jeu", "youtube_id", "timestamp_debut"])
         writer.writerow([titre, youtube_id, timestamp])
 
-    print(f"✅ Ajouté à musiques.csv : {titre}  (id={youtube_id}, départ à {timestamp}s)")
+    print(f"Ajouté à musiques.csv : {titre}  (id={youtube_id}, départ à {timestamp}s)")
     print("   Relance `python import_csv.py` pour l'intégrer à la base.")
 
 

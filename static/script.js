@@ -32,7 +32,7 @@ async function initialiserJeu() {
         essayerCreerLecteur();
 
     } catch (error) {
-        document.getElementById("message-resultat").innerHTML = "❌ Impossible de se connecter à l'API.";
+        document.getElementById("message-resultat").innerHTML = "Impossible de se connecter à l'API.";
     }
 }
 
@@ -144,7 +144,7 @@ document.getElementById("btn-valider").addEventListener("click", async () => {
 
         if (resultat.victoire) {
             partieTerminee = true;
-            messageDiv.innerHTML = `<span style="color: #4CAF50;">🎉 ${resultat.message}</span>`;
+            messageDiv.innerHTML = `<span style="color: #4CAF50;"> ${resultat.message}</span>`;
             if (player) player.pauseVideo();
             input.disabled = true;
             document.getElementById("btn-valider").disabled = true;
@@ -164,7 +164,7 @@ document.getElementById("btn-valider").addEventListener("click", async () => {
                 
                 sauvegarderProgression(false);
             } else {
-                messageDiv.innerHTML = `<span style="color: #f44336;">❌ ${resultat.message}</span>`;
+                messageDiv.innerHTML = `<span style="color: #f44336;"> ${resultat.message}</span>`;
                 sauvegarderProgression(false);
             }
         }
