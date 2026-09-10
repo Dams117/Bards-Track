@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bard's Track</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Petit emblème façon rosace de luth, pour ancrer le thème "barde" -->
+        <div class="emblem" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="38" height="38">
+                <defs>
+                    <linearGradient id="gradRosace" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#fbbf24"/>
+                        <stop offset="100%" stop-color="#ef4444"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="32" cy="32" r="29" fill="none" stroke="url(#gradRosace)" stroke-width="1.4"/>
+                <circle cx="32" cy="32" r="21" fill="none" stroke="url(#gradRosace)" stroke-width="1"/>
+                <circle cx="32" cy="32" r="4" fill="url(#gradRosace)"/>
+                <g stroke="url(#gradRosace)" stroke-width="1">
+                    <line x1="32" y1="9" x2="32" y2="18"/>
+                    <line x1="32" y1="46" x2="32" y2="55"/>
+                    <line x1="9" y1="32" x2="18" y2="32"/>
+                    <line x1="46" y1="32" x2="55" y2="32"/>
+                    <line x1="15.5" y1="15.5" x2="21.5" y2="21.5"/>
+                    <line x1="42.5" y1="42.5" x2="48.5" y2="48.5"/>
+                    <line x1="48.5" y1="15.5" x2="42.5" y2="21.5"/>
+                    <line x1="21.5" y1="42.5" x2="15.5" y2="48.5"/>
+                </g>
+            </svg>
+        </div>
+
+        <h1>Bard's Track</h1>
+        <p>Écoute l'extrait et devine le jeu !</p>
+        <p id="badge-jour" class="badge-jour"></p>
+
+        <!-- La zone de contrôle de la musique -->
+        <div class="lecteur">
+            <button id="btn-play" disabled>⏳</button>
+            <button id="btn-pause">
+                <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+        </div>
+
+        <!-- La barre de progression type YouTube -->
+        <div class="progression">
+            <span id="temps-actuel">0:00</span>
+            <input type="range" id="barre-lecture" value="0" min="0" max="100" step="0.1">
+            <span id="temps-total">0:00</span>
+        </div>
+
+        <div class="separateur" aria-hidden="true">
+            <span></span>
+            <span class="separateur-glyphe">◆</span>
+            <span></span>
+        </div>
+
+        <!-- La vraie barre de recherche avec autocomplétion -->
+        <div class="zone-jeu">
+            <input id="input-jeu" placeholder="Commence à taper le nom du jeu..." autocomplete="off">
+            <button id="btn-valider">Valider</button>
+        </div>
+
+        <p id="texte-compteur">Essais : 0 / 5</p>
+        <div id="message-resultat"></div>
+    </div>
+
+    <!-- LE SECRET : Le conteneur YouTube caché -->
+    <div id="youtube-cache">
+        <div id="lecteur-yt"></div>
+    </div>
+
+    <!-- Chargement de l'API YouTube et de notre script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>

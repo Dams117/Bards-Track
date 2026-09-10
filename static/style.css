@@ -1,0 +1,349 @@
+/* Polices : Cinzel (gravée, façon enseigne de taverne) pour le titre,
+   Poppins pour tout le reste de l'interface — deux rôles bien distincts. */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;600;800&display=swap');
+
+:root {
+    --nuit: #0b1220;
+    --panneau: #1e293b;
+    --or: #fbbf24;
+    --braise: #ef4444;
+    --texte: #f8fafc;
+    --texte-att: #94a3b8;
+    --liseré-or: rgba(251, 191, 36, 0.28);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--texte);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 32px 20px;
+    position: relative;
+    overflow-x: hidden;
+
+    /* Le fond n'est plus une couleur plate : une portée de musique très
+       discrète en texture, plus une lueur chaude qui monte derrière le
+       titre, comme une torche dans une taverne. */
+    background-color: var(--nuit);
+    background-image:
+        radial-gradient(ellipse 700px 500px at 50% 10%, rgba(251, 191, 36, 0.16), transparent 65%),
+        repeating-linear-gradient(
+            to bottom,
+            rgba(148, 163, 184, 0.09) 0px, rgba(148, 163, 184, 0.09) 1px, transparent 1px, transparent 9px,
+            rgba(148, 163, 184, 0.09) 9px, rgba(148, 163, 184, 0.09) 10px, transparent 10px, transparent 19px,
+            rgba(148, 163, 184, 0.09) 19px, rgba(148, 163, 184, 0.09) 20px, transparent 20px, transparent 29px,
+            rgba(148, 163, 184, 0.09) 29px, rgba(148, 163, 184, 0.09) 30px, transparent 30px, transparent 39px,
+            rgba(148, 163, 184, 0.09) 39px, rgba(148, 163, 184, 0.09) 40px, transparent 40px, transparent 150px
+        );
+    background-attachment: fixed;
+}
+
+/* Deux halos flous dans les coins pour donner de la profondeur à l'espace
+   vide autour de la carte, dans les mêmes teintes que le dégradé du titre. */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+body::before {
+    width: 460px;
+    height: 460px;
+    top: -140px;
+    left: -130px;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.28), transparent 70%);
+}
+
+body::after {
+    width: 520px;
+    height: 520px;
+    bottom: -190px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.24), transparent 70%);
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    background-color: var(--panneau);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--liseré-or);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        0 0 70px rgba(239, 68, 68, 0.06);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Un filet intérieur pour un effet "panneau gravé" plutôt qu'une simple boîte plate */
+.container::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(251, 191, 36, 0.10);
+    border-radius: 13px;
+    pointer-events: none;
+}
+
+/* --- L'EMBLÈME (petite rosace façon luth de barde) --- */
+.emblem {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.emblem svg {
+    animation: tourner-lentement 50s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .emblem svg {
+        animation: none;
+    }
+}
+
+@keyframes tourner-lentement {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    background: linear-gradient(to right, var(--or), var(--braise));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 2.35rem;
+    margin-bottom: 6px;
+}
+
+p {
+    color: var(--texte-att);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+.badge-jour {
+    display: inline-block;
+    padding: 5px 16px;
+    border: 1px solid var(--liseré-or);
+    border-radius: 20px;
+    color: var(--or);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+    min-height: 1em;
+}
+
+/* --- LES BOUTONS (inchangé) --- */
+button {
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+button:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    background-color: #475569 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --- LES BOUTONS MUSICAUX (STYLE SPOTIFY, inchangé) --- */
+.lecteur {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#btn-play, #btn-pause {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#btn-play {
+    background-color: #1db954;
+    color: white;
+}
+
+#btn-pause {
+    background-color: #334155;
+    color: white;
+}
+
+#btn-play svg {
+    margin-left: 3px;
+}
+
+#btn-valider {
+    background-color: #3b82f6;
+    color: white;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    padding: 14px;
+}
+
+/* --- SÉPARATEUR ENTRE LE LECTEUR ET LA ZONE DE RÉPONSE --- */
+.separateur {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 26px 0 22px;
+}
+
+.separateur span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--liseré-or), transparent);
+}
+
+.separateur .separateur-glyphe {
+    flex: none;
+    height: auto;
+    background: none;
+    color: var(--or);
+    font-size: 0.75rem;
+}
+
+/* --- LA BARRE DE RECHERCHE --- */
+.zone-jeu {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#input-jeu {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid #334155;
+    background-color: var(--nuit);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Focus clavier visible, pour l'accessibilité */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--or);
+    outline-offset: 2px;
+}
+
+/* --- TEXTES DYNAMIQUES --- */
+#texte-compteur {
+    font-weight: 600;
+    color: var(--texte);
+    background-color: #334155;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+#message-resultat {
+    font-weight: 600;
+    font-size: 1.1rem;
+    min-height: 30px;
+}
+
+/* ON CACHE YOUTUBE (position au lieu de display:none, sinon l'API YouTube boude) */
+#youtube-cache {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 100px;
+    height: 100px;
+}
+
+/* --- LA BARRE DE PROGRESSION (STYLE YOUTUBE, inchangé) --- */
+.progression {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    color: var(--texte-att);
+}
+
+#barre-lecture {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: #334155;
+    border-radius: 2px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border: none;
+}
+
+#barre-lecture::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff0000;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#barre-lecture:hover::-webkit-slider-thumb {
+    transform: scale(1.3);
+}

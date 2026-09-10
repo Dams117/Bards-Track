@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# La base se reconstruit toute seule à partir de musiques.csv au démarrage
+# (voir le lifespan dans main.py) : pas besoin de la versionner.
+vgm_blindtest.db
