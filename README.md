@@ -83,5 +83,3 @@ Le projet est pensé pour tourner comme un service unique (API + site) : `main.p
 - **Start command** : `uvicorn main:app --host 0.0.0.0 --port $PORT`
 
 ## Projet
-
-Réalisé dans le cadre d'un projet scolaire.
